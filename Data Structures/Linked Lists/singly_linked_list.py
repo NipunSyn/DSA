@@ -1,4 +1,5 @@
 # Class for node
+# has data and pointer to next
 class Node:
     def __init__ (self, data):
         self.data = data

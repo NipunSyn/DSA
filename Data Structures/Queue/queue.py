@@ -1,5 +1,6 @@
 from collections import deque
 
+#implementation of queue datastructure
 class Queue:
     def __init__ (self):
         self.buffer = deque()

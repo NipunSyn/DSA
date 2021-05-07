@@ -1,5 +1,6 @@
 from stack import Stack
 
+#reversing string
 def reverse(string):
     s = Stack()
     for c in string:

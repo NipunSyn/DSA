@@ -1,13 +1,13 @@
 class HashTable:  
     def __init__(self):
-        self.MAX = 100
-        self.arr = [None for i in range(self.MAX)]
+        self.MAXIMUM = 100
+        self.arr = [None for i in range(self.MAXIMUM)]
         
     def get_hash(self, key):
         hash = 0
         for char in key:
             hash += ord(char)
-        return hash % self.MAX
+        return hash % self.MAXIMUM
     
     def __getitem__(self, index):
         h = self.get_hash(index)

@@ -1,5 +1,6 @@
 from stack import Stack
 
+#decimal to binary
 def binary(x):
     s = Stack()
     while x > 0:
