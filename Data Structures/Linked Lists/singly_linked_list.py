@@ -1,6 +1,9 @@
 # Class for node
 # has data and pointer to next
+
 class Node:
+    """Node for the linked list. Contains data, and the pointer to the next node
+    """
     def __init__ (self, data):
         self.data = data
         self.next = None
@@ -8,11 +11,15 @@ class Node:
 
 # Class for the linked list 
 class LinkedList:
+    """Implementation of the linked list. Initialization is done using the head pointer
+    """
     def __init__ (self):
         self.head = None
     
     #printing the elemets of the list, one by one    
     def print_list(self):
+        """Printing the list element by element
+        """
         
         current = self.head #pointer to iterate over the list
         while current is not None: #printing till the pointer points to null
@@ -21,7 +28,12 @@ class LinkedList:
     
     #adding an element to the end of the list
     def append(self, data):
-        new_node = Node(data)
+        """Adds a node to the end of the linked list
+
+        Args:
+            data (object, int): Data could be of any type
+        """
+        new_node = Node(data) #create a node with data
         
         if self.head is None: #if the list is empty
             self.head = new_node #pointing the head to the new node
@@ -29,11 +41,16 @@ class LinkedList:
         
         #else
         last_node = self.head #initiating a pointer
-        while last_node.next is not None: #traversing till last node is located
+        while last_node.next: #traversing till last node is located
             last_node = last_node.next #break when last node reached
         last_node.next = new_node #make this point to the new node
     
     def prepend(self, data):
+        """Adds a node to the beginning of the linked list
+
+        Args:
+            data (object, int): Data could be of any type
+        """
         new_node = Node(data)
         
         new_node.next = self.head
@@ -50,6 +67,11 @@ class LinkedList:
         previous.next = new_node
     
     def delete_by_key(self, key):
+        """Deleting a node by the given data value
+
+        Args:
+            key (object, int): The node containing the given key will be deleted
+        """
         current = self.head #if the first node is to be deleted
         if current and current.data == key:
             self.head = current.next
@@ -69,6 +91,12 @@ class LinkedList:
         current = None
     
     def delete_by_index(self, position):
+        """Deleting a node at a given index
+
+        Args:
+            position (int > 0): The node at the given position will be deleted
+        """
+        
         current = self.head
         if position == 0:
             self.head = current.next
