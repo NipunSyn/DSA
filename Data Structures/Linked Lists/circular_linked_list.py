@@ -161,11 +161,12 @@ class CircularLinkedList:
 
 
 cl = CircularLinkedList()
-cl.append('10')
-cl.append('11')
-cl.append('2')
-cl.append('3')
-cl.append('4')
+cl.append(1)
+cl.append(2)
+cl.append(3)
+cl.append(4)
+cl.append(5)
+
 
 print(cl.josephus(2))
 
