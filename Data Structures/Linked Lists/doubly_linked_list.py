@@ -74,7 +74,7 @@ class DoublyLinkedList:
                 return
             current = current.next
 
-    def delete_node(self, key):
+    def delete_key(self, key):
         current = self.head
         if not current.prev and not current.next and current.data == key:
             self.head = None
@@ -104,6 +104,78 @@ class DoublyLinkedList:
             current.prev = None
             return
 
+    def delete_node(self, node):
+        current = self.head
+        while current:
+            if current == node and current == self.head:
+                if not current.next:
+                    current = None
+                    self.head = None
+                    return
+
+                else:
+                    nxt = current.next
+                    current.next = None
+                    nxt.prev = None
+                    current = None
+                    self.head = nxt
+                    return
+
+            elif current == node:
+                if current.next:
+                    nxt = current.next
+                    prev = current.prev
+                    prev.next = nxt
+                    nxt.prev = prev
+                    current.next = None
+                    current.prev = None
+                    current = None
+                    return
+
+                else:
+                    prev = current.prev
+                    prev.next = None
+                    current.prev = None
+                    current = None
+                    return
+            current = current.next
+
+    def reverse_list(self):
+        temp = None
+        current = self.head
+        while current:
+            temp = current.prev
+            current.prev = current.next
+            current.next = temp
+            current = current.prev
+        if temp:
+            self.head = temp.prev
+
+    def remove_duplicates(self):
+        current = self.head
+        seen = dict()
+        while current:
+            if current.data not in seen:
+                seen[current.data] = 1
+                current = current.next
+            else:
+                nxt = current.next
+                self.delete_node(current)
+                current = nxt
+
+    def pairs_with_sum(self, sum_value):
+        pairs = list()
+        p = self.head
+        q = None
+        while p:
+            q = p.next
+            while q:
+                if p.data + q.data == sum_value:
+                    pairs.append(f"({p.data}, {q.data})")
+                q = q.next
+            p = p.next
+        return pairs
+
     def print_list(self):
         current = self.head
         while current:
@@ -124,11 +196,35 @@ class DoublyLinkedList:
 # dll.add_after_node(5, 6)
 # dll.print_list()
 
+# dll = DoublyLinkedList()
+# dll.append(1)
+# dll.append(2)
+# dll.append(3)
+# dll.append(4)
+# dll.append(5)
+# # dll.delete_key(4)
+# dll.reverse_list()
+# dll.print_list()
+
+# dll = DoublyLinkedList()
+# dll.append(8)
+# dll.append(8)
+# dll.append(4)
+# dll.append(4)
+# dll.append(6)
+# dll.append(4)
+# dll.append(9)
+# dll.append(6)
+# dll.append(10)
+# dll.append(11)
+# dll.remove_duplicates()
+# dll.print_list()
+
 dll = DoublyLinkedList()
 dll.append(1)
 dll.append(2)
 dll.append(3)
 dll.append(4)
 dll.append(5)
-dll.delete_node(4)
-dll.print_list()
+
+print(dll.pairs_with_sum(9))
