@@ -13,8 +13,8 @@ class Graph:
     
     
     #Finding all the routes between cities
-    def get_paths(self, start, end, path= []):
-        path += [start]
+    def get_paths(self, start, end, path= list()):
+        path = path + [start]
         
         if start == end:
             return [path]
@@ -30,6 +30,25 @@ class Graph:
                 for p in new_paths:
                     paths.append(p)
         return paths
+    
+    #Finding the shortest path
+    def shortest_path(self, start, end, path = list()):
+        path = path + [start]
+        
+        if start == end:
+            return path
+        if start not in self.graph_dict:
+            return None
+        
+        shortest_path = None
+        for node in self.graph_dict[start]:
+            if node not in path:
+                shortest_so_far = self.shortest_path(node, end, path)
+                if shortest_so_far:
+                    if shortest_path is None or len(shortest_so_far) < len(shortest_path):
+                        shortest_path = shortest_so_far
+        return shortest_path
+        
 
 
 routes = [
@@ -44,9 +63,8 @@ routes = [
 
 route_graph = Graph(routes)
 start = "Mumbai"
-end = "New York"
-print(route_graph.get_paths(start, end))
+end = "Toronto"
+# print(route_graph.get_paths(start, end))
+print(route_graph.shortest_path(start, end))
 
 
-
-#Finding the shortest path
